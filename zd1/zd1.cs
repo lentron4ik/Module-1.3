@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace zd1
 {
-    internal class Program
+    internal class zd1
     {
         static void Main(string[] args)
         {
