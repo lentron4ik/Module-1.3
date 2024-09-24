@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace zd2
 {
@@ -17,18 +14,27 @@ namespace zd2
             List<int> array = new List<int>();
             int currentSum = 0;
 
-            // Добавляем элементы в массив, пока сумма не превысит maxSum
+            // Начинаем с максимального значения (9) и добавляем его, если это возможно
             while (currentSum < maxSum)
             {
-                int newValue = random.Next(1, 10); // Генерация случайного числа от 1 до 9
-                if (currentSum + newValue <= maxSum)
+                // Если оставшаяся сумма больше или равна 9, добавляем 9
+                if (currentSum + 9 <= maxSum)
                 {
-                    array.Add(newValue);
-                    currentSum += newValue;
+                    array.Add(9);
+                    currentSum += 9;
                 }
                 else
                 {
-                    break;
+                    // Иначе ищем наибольшее значение, которое можно добавить
+                    for (int i = 8; i >= 1; i--)
+                    {
+                        if (currentSum + i <= maxSum)
+                        {
+                            array.Add(i);
+                            currentSum += i;
+                            break; // Выходим из цикла после добавления элемента
+                        }
+                    }
                 }
             }
 
