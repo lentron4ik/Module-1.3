@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace zd3
 {
@@ -27,19 +25,31 @@ namespace zd3
             Console.WriteLine("Исходная матрица:");
             PrintMatrix(matrix, N);
 
-            // Сортировка строк по возрастанию суммы элементов
-            var sortedMatrix = matrix.Cast<int>()
-                                     .Select((value, index) => new { Row = index / N, Col = index % N, Value = value })
-                                     .GroupBy(x => x.Row)
-                                     .OrderBy(rowGroup => rowGroup.Sum(x => x.Value))
-                                     .SelectMany(rowGroup => rowGroup.Select(x => x.Value))
-                                     .ToArray();
-
-            // Преобразование отсортированного массива обратно в матрицу
-            int[,] resultMatrix = new int[N, N];
-            for (int i = 0; i < N * N; i++)
+            // Создание списка строк и их сумм
+            var rowsWithSums = new List<(int[] Row, int Sum)>();
+            for (int i = 0; i < N; i++)
             {
-                resultMatrix[i / N, i % N] = sortedMatrix[i];
+                int sum = 0;
+                int[] row = new int[N];
+                for (int j = 0; j < N; j++)
+                {
+                    row[j] = matrix[i, j];
+                    sum += matrix[i, j];
+                }
+                rowsWithSums.Add((row, sum));
+            }
+
+            // Сортировка строк по возрастанию суммы элементов
+            var sortedRows = rowsWithSums.OrderBy(x => x.Sum).ToList();
+
+            // Заполнение отсортированной матрицы
+            int[,] resultMatrix = new int[N, N];
+            for (int i = 0; i < N; i++)
+            {
+                for (int j = 0; j < N; j++)
+                {
+                    resultMatrix[i, j] = sortedRows[i].Row[j];
+                }
             }
 
             Console.WriteLine("\nОтсортированная матрица:");
