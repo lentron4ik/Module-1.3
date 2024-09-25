@@ -4,7 +4,7 @@ namespace zd1
 {
     public class zd1
     {
-        // Статический метод для вычисления НОД (алгоритм Евклида)
+        // Статический метод для вычисления НОД
         public static int GCD(int a, int b)
         {
             while (b != 0)
