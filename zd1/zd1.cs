@@ -5,15 +5,15 @@ namespace zd1
     public class zd1
     {
         // Статический метод для вычисления НОД
-        public static int GCD(int a, int b)
+        public static int GCD(int numerator, int denominator)
         {
-            while (b != 0)
+            while (denominator != 0)
             {
-                int temp = b;
-                b = a % b;
-                a = temp;
+                int remainder = denominator;
+                denominator = numerator % denominator;
+                numerator = remainder;
             }
-            return a;
+            return numerator;
         }
 
         static void Main(string[] args)
@@ -42,3 +42,4 @@ namespace zd1
         }
     }
 }
+
