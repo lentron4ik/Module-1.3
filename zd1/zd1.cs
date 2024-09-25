@@ -18,7 +18,7 @@ namespace zd1
 
         static void Main(string[] args)
         {
-            Console.Write("Введите числитель: ");
+            Console.Write("Введите числитель (неотрицательное число): ");
             int numerator = int.Parse(Console.ReadLine());
 
             Console.Write("Введите знаменатель (положительное число): ");
